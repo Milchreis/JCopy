@@ -1,6 +1,7 @@
 package de.milchreis.jcopy;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 
 import javafx.application.Application;
@@ -14,7 +15,7 @@ public class Main extends Application {
 
 	public static AppModel model;
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		if(args.length > 0) {
 			model = new AppModel(new File(args[0]));
 		} else {
