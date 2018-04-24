@@ -12,7 +12,9 @@ After restarting the tool the last session is loaded. You are able to start the 
  - Joins different directories to a target directory (f.e. usb stick)
  - Copies new and modified files only for a faster process
  - Remember session state for easy usage
- - Commandline interface for changeable session files
+ - Commandline interface for 
+ 	- changeable session files
+ 	- headless mode (f.e. bash jobs)
  - Languages: English, German
 
 ### Download ###

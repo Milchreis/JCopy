@@ -16,13 +16,23 @@ public class Main extends Application {
 	public static AppModel model;
 	
 	public static void main(String[] args) throws IOException {
-		if(args.length > 0) {
-			model = new AppModel(new File(args[0]));
+
+		boolean isHeadless = args.length > 0 && args[0].equals("--headless");
+		boolean hasFile = (args.length == 1 && !isHeadless) || (args.length == 2 && isHeadless);
+		
+		if(hasFile) {
+			model = new AppModel(new File(args[isHeadless ? 1 : 0]));
 		} else {
 			model = new AppModel();
 		}
 		
-		Application.launch(Main.class);
+		if(isHeadless) {
+			model.backup(null);
+			System.exit(0);
+		
+		} else {
+			Application.launch(Main.class);
+		}
 	}
 
 	@Override
@@ -41,4 +51,5 @@ public class Main extends Application {
 	
 	public void onClose() {
 	}
+	
 }
