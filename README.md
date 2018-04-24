@@ -1,7 +1,6 @@
-# JCopy
-A small and simple backup tool for coping your data. It's a java rewrite of [CoPy](https://github.com/Milchreis/CoPy)
-
 ![Alt text](https://raw.githubusercontent.com/Milchreis/JCopy/master/src/main/resources/logo.png "Screenshot1")
+
+A small and simple backup tool for coping your data. It's a java rewrite of [CoPy](https://github.com/Milchreis/CoPy)
 
 With JCopy you get the possibility to backup your files in a comfortable and fast way. Select all interesting directories for saving and a destination, f. e. a usb-drive. 
 The first backup will copies all files and takes possibly a while. Your session (selected directories) will saved for the next time. 
