@@ -17,8 +17,16 @@ public class AppModel {
 	
 	private BackupListener updateCallback;
 	
+	public AppModel(File session) throws IOException {
+		this.session = session;
+		init();
+	}
+	
 	public AppModel() throws IOException {
-		
+		init();
+	}
+	
+	public void init() throws IOException {
 		if(session.exists()) {
 			List<File> files = Tools.readIn(session);
 			
