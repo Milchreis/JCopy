@@ -67,18 +67,20 @@ public class AppModel {
 		
 		if(_updateCallback != null) {
 			updateCallback = _updateCallback;
-			
+
 			long numbers = Tools.getFileCount(sources);
 			updateCallback.onFilesCount(numbers);
-			
-			sources.forEach(f -> {
-				try {
-					Tools.backupFiles(f, destination, updateCallback);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			});
-			
+		}
+		
+		sources.forEach(f -> {
+			try {
+				Tools.backupFiles(f, destination, updateCallback);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+		
+		if(_updateCallback != null) {
 			updateCallback.onFinish();
 		}
 	}

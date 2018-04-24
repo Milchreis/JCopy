@@ -11,7 +11,9 @@ After restarting the tool the last session is loaded. You are able to start the 
  - Joins different directories to a target directory (f.e. usb stick)
  - Copies new and modified files only for a faster process
  - Remember session state for easy usage
- - Commandline interface for changeable session files
+ - Commandline interface for 
+ 	- changeable session files
+ 	- headless mode (f.e. bash jobs)
  - Languages: English, German
 
 ### Download ###
@@ -26,7 +28,12 @@ After restarting the tool the last session is loaded. You are able to start the 
 ### Commandline Interface ###
 If you want to use the tool in bash, as cronjob or something else you can use the headless mode. Start the programm with a commandline argument and the gui will be not loaded. CoPy expects just one argument. Put an individual sessionfile (as absolute or relative path) to the programm and it will be started the backup-process.
 
-`usage: java -jar JCopy.jar /path/to/sessionfile`
+````
+usage: java -jar JCopy.jar [--headless] [SESSION-FILE]
+
+--headless 			optional GUI-less mode, especially for shell/terminal
+SESSION-FILE			optional path to another session file, f.e. /path/to/my/other/session.jcopy
+```
 
 Create your session file manually in a simpel text editor or by CoPy itself. The sessionfile contains in the first line the path to the target directory. All following lines will be interpreted as source directories. If you start CoPy in GUI Mode (without arguments) you can take you configurations and run the backup process. After clicking on the backup-button, the sessionfile will be created at your home directory like `/home/you/.jcopy`.
 
