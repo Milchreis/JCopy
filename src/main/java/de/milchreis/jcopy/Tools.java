@@ -45,7 +45,7 @@ public class Tools {
 			System.out.println(curFile);
 
 			if(curFile.isFile()) {
-				String subpath = curFile.getAbsolutePath().replace(f.getAbsolutePath(), "");
+				String subpath = curFile.getAbsolutePath().replace(f.getParentFile().getAbsolutePath(), "");
 				File destFile = new File(destination, subpath);
 				
 				try {
