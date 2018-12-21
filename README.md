@@ -33,8 +33,8 @@ If you want to use the tool in bash, as cronjob or something else you can use th
 ```
 usage: java -jar JCopy.jar [--headless] [SESSION-FILE]
 
---headless 		optional GUI-less mode, especially for shell/terminal
-SESSION-FILE	optional path to another session file, f.e. /path/to/my/other/session.jcopy
+--headless     optional GUI-less mode, especially for shell/terminal
+SESSION-FILE   optional path to another session file, f.e. /path/to/my/other/session.jcopy
 ```
 
 Create your session file manually in a simpel text editor or by CoPy itself. The sessionfile contains in the first line the path to the target directory. All following lines will be interpreted as source directories. If you start CoPy in GUI Mode (without arguments) you can take you configurations and run the backup process. After clicking on the backup-button, the sessionfile will be created at your home directory like `/home/you/.jcopy`.
