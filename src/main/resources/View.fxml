@@ -26,17 +26,17 @@
             <ListView fx:id="elementList" maxWidth="1.7976931348623157E308" prefHeight="204.0" prefWidth="443.0" HBox.hgrow="ALWAYS" />
             <VBox>
                <children>
-                  <Button fx:id="addElement" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onAddElement" text="Add element">
+                  <Button fx:id="addElement" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onAddElement" text="%items.add">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="removeElement" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onRemoveElement" text="Remove element from list">
+                  <Button fx:id="removeElement" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onRemoveElement" text="%items.removeItem">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="removeAllElements" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onRemoveAllElements" text="Remove all elements from list" />
+                  <Button fx:id="removeAllElements" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onRemoveAllElements" text="%items.removeAll" />
                </children>
                <HBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" />
@@ -47,12 +47,12 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </VBox.margin>
       </HBox>
-      <Button fx:id="selectDestination" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onSelectDestination" text="Select backup destination directory">
+      <Button fx:id="selectDestination" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onSelectDestination" text="%destination.select">
          <VBox.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </VBox.margin>
       </Button>
-      <Button fx:id="startBackup" defaultButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onStartBackup" prefHeight="58.0" prefWidth="630.0" text="Start backup">
+      <Button fx:id="startBackup" defaultButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onStartBackup" prefHeight="58.0" prefWidth="630.0" text="%start">
          <VBox.margin>
             <Insets left="5.0" right="5.0" />
          </VBox.margin>

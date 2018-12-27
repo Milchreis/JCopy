@@ -28,13 +28,7 @@ public class ViewController {
 	@FXML
 	public void initialize() {
 		Language lang = Language.getInstance();
-		
-		addElement.setText(lang.get("items.add"));
-		removeElement.setText(lang.get("items.removeItem"));
-		removeAllElements.setText(lang.get("items.removeAll"));
-		selectDestination.setText(lang.get("destination.select"));
-		startBackup.setText(lang.get("start"));
-		
+
 		if(model.getSources().size() > 0) {
 			updateList();
 		}
@@ -42,9 +36,6 @@ public class ViewController {
 		if(model.getDestination() != null) {
 			selectDestination.setText(lang.get("destination") + ": " + model.getDestination().getAbsolutePath());
 		}
-	}
-	
-	public void onClose() {
 	}
 	
 	public void onAddElement() {
