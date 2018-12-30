@@ -7,13 +7,15 @@ import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.concurrent.Task;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
 
-public class ViewController {
+public class ViewController implements ViewListener {
 
 	private @FXML Button addElement;
 	private @FXML Button removeElement;
@@ -36,6 +38,13 @@ public class ViewController {
 		if(model.getDestination() != null) {
 			selectDestination.setText(lang.get("destination") + ": " + model.getDestination().getAbsolutePath());
 		}
+
+		elementList.setOnMouseClicked(click -> {
+			if (click.getClickCount() == 2) {
+				String selectedItem = elementList.getSelectionModel().getSelectedItem();
+				FileBrowserOpener.open(new File(selectedItem));
+			}
+		});
 	}
 	
 	public void onAddElement() {
@@ -73,44 +82,12 @@ public class ViewController {
 		updateDisable(true);
 		model.setCurrentNumber(0);
 		model.setNumberOfFiles(0);
-		
-		Task<Void> task = new Task<Void>() {
-		    @Override public Void call() throws IOException {
-		        
-		    	model.backup(new BackupListener() {
-					
-					@Override
-					public void onFinish() {
-						System.out.println("Finished");
-						updateDisable(false);
-					}
-					
-					@Override
-					public void onFilesCount(long numbers) {
-						model.setNumberOfFiles(numbers);
-					}
-					
-					@Override
-					public void onFileProcessed(File curFile, File destFile) {
-						model.setCurrentNumber(model.getCurrentNumber() + 1);
-						updateProgress(model.getCurrentNumber(), model.getNumberOfFiles());
-					}
-					
-					@Override
-					public void onFileProcessError(File curFile, IOException e) {
-						e.printStackTrace();
-						updateDisable(false);
-					}
-				});
-		    	return null;
-		    }
-		};
-		
-		progressbar.progressProperty().bind(task.progressProperty());
-		new Thread(task).start();
+
+		Task backupTask = new BackupTask(model, this);
+		progressbar.progressProperty().bind(backupTask.progressProperty());
+		new Thread(backupTask).start();
 	}
-	
-	
+
 	private void updateList() {
 		List<String> sources = model.getSources()
 				.stream()
@@ -119,8 +96,9 @@ public class ViewController {
 		
 		elementList.setItems(FXCollections.observableArrayList(sources));
 	}
-	
-	private void updateDisable(boolean disable) {
+
+	@Override
+	public void updateDisable(boolean disable) {
 		addElement.setDisable(disable);
 		removeElement.setDisable(disable);
 		removeAllElements.setDisable(disable);
