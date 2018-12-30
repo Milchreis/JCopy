@@ -16,7 +16,7 @@ After restarting the tool the last session is loaded. You are able to start the 
  - Commandline interface for 
  	- changeable session files
  	- headless mode (f.e. bash jobs)
- - Languages: English, German
+ - Languages: english, german, spanish, french, polish, italien 
 
 ### Download ###
  - See the [releases](https://github.com/Milchreis/JCopy/releases)
