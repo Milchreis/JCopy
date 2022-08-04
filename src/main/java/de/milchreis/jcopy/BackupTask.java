@@ -7,8 +7,8 @@ import java.io.IOException;
 
 public class BackupTask extends Task {
 
-    private AppModel model;
-    private ViewListener viewListener;
+    private final AppModel model;
+    private final ViewListener viewListener;
 
     public BackupTask(AppModel model, ViewListener viewListener) {
         this.model = model;
@@ -34,6 +34,7 @@ public class BackupTask extends Task {
             @Override
             public void onFileProcessed(File curFile, File destFile) {
                 model.setCurrentNumber(model.getCurrentNumber() + 1);
+                System.out.println(curFile.getAbsolutePath());
                 updateProgress(model.getCurrentNumber(), model.getNumberOfFiles());
             }
 

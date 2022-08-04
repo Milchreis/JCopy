@@ -18,7 +18,7 @@ public class Tools {
 
 	public static void writeOut(File session, List<File> save) throws IOException {
 		String content = save.stream()
-				.map(f -> f.getAbsolutePath())
+				.map(File::getAbsolutePath)
 				.collect(Collectors.joining("\n"));
 		
 		Files.write(session.toPath(), content.getBytes());
@@ -42,7 +42,6 @@ public class Tools {
 		Files.walk(f.toPath()).parallel().forEach(p -> {
 		
 			File curFile = p.toFile();
-			System.out.println(curFile);
 
 			if(curFile.isFile()) {
 				String subpath = curFile.getAbsolutePath().replace(f.getParentFile().getAbsolutePath(), "");
@@ -52,12 +51,10 @@ public class Tools {
 					if(destFile.exists()) {
 						if(curFile.lastModified() -  destFile.lastModified() > 1) {
 							FileUtils.copyFile(curFile, destFile);
-							System.out.println("Copy: " + destFile.getAbsolutePath());
 						}
 					} else {
 						destFile.getParentFile().mkdirs();
 						FileUtils.copyFile(curFile, destFile);
-						System.out.println("First copy: " + destFile.getAbsolutePath());
 					}
 					
 					if(updateCallback != null) {
