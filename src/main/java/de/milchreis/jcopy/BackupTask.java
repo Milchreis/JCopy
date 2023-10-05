@@ -1,11 +1,9 @@
 package de.milchreis.jcopy;
 
-import javafx.concurrent.Task;
-
 import java.io.File;
 import java.io.IOException;
 
-public class BackupTask extends Task {
+public class BackupTask implements Runnable {
 
     private final AppModel model;
     private final ViewListener viewListener;
@@ -16,35 +14,37 @@ public class BackupTask extends Task {
     }
 
     @Override
-    protected Object call() throws Exception {
+    public void run() {
 
-        model.backup(new BackupListener() {
+        try {
+            model.backup(new BackupListener() {
 
-            @Override
-            public void onFinish() {
-                System.out.println("Finished");
-                viewListener.updateDisable(false);
-            }
+                @Override
+                public void onFinish() {
+                    System.out.println("Finished");
+                    viewListener.updateDisable(false);
+                }
 
-            @Override
-            public void onFilesCount(long numbers) {
-                model.setNumberOfFiles(numbers);
-            }
+                @Override
+                public void onFilesCount(long numbers) {
+                    model.setNumberOfFiles(numbers);
+                }
 
-            @Override
-            public void onFileProcessed(File curFile, File destFile) {
-                model.setCurrentNumber(model.getCurrentNumber() + 1);
-                System.out.println(curFile.getAbsolutePath());
-                updateProgress(model.getCurrentNumber(), model.getNumberOfFiles());
-            }
+                @Override
+                public void onFileProcessed(File curFile, File destFile) {
+                    model.setCurrentNumber(model.getCurrentNumber() + 1);
+                    System.out.println(curFile.getAbsolutePath());
+                    viewListener.updateProgress(model.getCurrentNumber(), model.getNumberOfFiles());
+                }
 
-            @Override
-            public void onFileProcessError(File curFile, IOException e) {
-                e.printStackTrace();
-                viewListener.updateDisable(false);
-            }
-        });
-
-        return null;
+                @Override
+                public void onFileProcessError(File curFile, IOException e) {
+                    e.printStackTrace();
+                    viewListener.updateDisable(false);
+                }
+            });
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
